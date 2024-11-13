@@ -1,34 +1,13 @@
 <script>
-  let date = new Date();
-  let diningBalances = {
-    bigRed: 0.00,
-    diningDollars: 0.00,
-    mpFlex: 1.01,
-    mealPlan: 0.00,
-    bonusMeals: 0,
-    meals: 0,
-  };
-  let nearestRestaurant = {
-    name: "Starbucks Coffee",
-    distance: 866,
-    logo: "path/to/starbucks-logo.png" // Replace with actual image path
-  };
-  let nearestLab = {
-    name: "Cravens Library 4th Floor",
-    distance: 1580,
-    appleIcon: true,
-    windowsIcon: true
-  };
+  import Home from '../src/components/Home.svelte';
+  import Account from '../src/components/Account.svelte';
 
-  let additionalItems = [
-    { id: 1, title: "Item 1", description: "Additional content example 1" },
-    { id: 2, title: "Item 2", description: "Additional content example 2" },
-    { id: 3, title: "Item 3", description: "Additional content example 3" },
-  ];
+  // State to track the current page, default is Home page
+  let currentPage = 'Home';
 
-  // Navigation function (replace with actual logic if needed)
-  function navigate(section) {
-    console.log(`Navigating to ${section}`);
+  // Navigation function
+  function navigate(page) {
+    currentPage = page;
   }
 </script>
 
@@ -40,7 +19,7 @@
     --uc-white: #ffffff;
   }
 
-  /* Phone Container - Fit to Viewport */
+  /* Phone Container */
   .phone-container {
     width: 100vw;
     height: 90vh;
@@ -59,83 +38,6 @@
     flex-direction: column;
   }
 
-  /* Notch */
-  .notch {
-    width: 30vw;
-    max-width: 210px;
-    height: 30px;
-    background-color: var(--uc-black);
-    border-radius: 0 0 20px 20px;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-  }
-
-  /* Status bar space */
-  .status-bar-space {
-    height: 44px;
-    background-color: var(--uc-white);
-  }
-
-  /* Scrollable content area */
-  .scrollable-content {
-    overflow-y: auto;
-    flex: 1;
-    padding: 1rem;
-  }
-
-  .dashboard {
-    font-family: Arial, sans-serif;
-    color: var(--uc-black);
-  }
-
-  .date-card, .balances-card, .labs-card, .additional-item {
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-color: var(--uc-white);
-  }
-
-  .date-card h2 {
-    font-size: 1.2rem;
-    margin: 0;
-    color: var(--uc-red);
-  }
-
-  .balances-card h3, .labs-card h3 {
-    color: var(--uc-red);
-    margin: 0;
-    font-size: 1.1rem;
-  }
-
-  .balances-grid {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .balance-item {
-    text-align: center;
-  }
-
-  .restaurant, .lab {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .refresh-button {
-    cursor: pointer;
-    color: var(--uc-red);
-    font-size: 0.9rem;
-    text-align: right;
-    margin-top: 0.5rem;
-  }
-
   /* Navbar at the bottom */
   .navbar {
     display: flex;
@@ -147,6 +49,7 @@
     padding-top: 0.5rem;
     position: sticky;
     bottom: 0;
+    margin-top: auto;
   }
 
   .nav-item {
@@ -172,53 +75,12 @@
 </style>
 
 <div class="phone-container">
-  <!-- Notch at the top -->
-  <div class="notch"></div>
-
-  <!-- Status bar space below notch -->
-  <div class="status-bar-space"></div>
-
-  <!-- Scrollable content -->
-  <div class="scrollable-content">
-    <div class="dashboard">
-      <!-- Date Card -->
-      <div class="date-card">
-        <h2>{date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</h2>
-        <p>No more events today</p>
-      </div>
-
-      <!-- Dining Balances -->
-      <div class="balances-card">
-        <h3>Dining</h3>
-        <div class="balances-grid">
-          <div class="balance-item">
-            <p>Big Red</p>
-            <strong>${diningBalances.bigRed.toFixed(2)}</strong>
-          </div>
-          <div class="balance-item">
-            <p>Dining Dollars</p>
-            <strong>${diningBalances.diningDollars.toFixed(2)}</strong>
-          </div>
-          <div class="balance-item">
-            <p>MP Flex</p>
-            <strong>${diningBalances.mpFlex.toFixed(2)}</strong>
-          </div>
-          <div class="balance-item">
-            <p>Meal Plan</p>
-            <strong>${diningBalances.mealPlan.toFixed(2)}</strong>
-          </div>
-          <div class="balance-item">
-            <p>Bonus Meals</p>
-            <strong>{diningBalances.bonusMeals}</strong>
-          </div>
-          <div class="balance-item">
-            <p>Meals</p>
-            <strong>{diningBalances.meals}</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Conditionally render the current page component -->
+  {#if currentPage === 'Home'}
+    <Home />
+  {:else if currentPage === 'Account'}
+    <Account />
+  {/if}
 
   <!-- Bottom Navbar -->
 
