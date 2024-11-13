@@ -1,6 +1,7 @@
 <script>
   import Home from '../src/components/Home.svelte';
-  import Map from '../src/components/Map.svelte'
+  import Map from '../src/components/Map.svelte';
+  import Modules from '../src/components/Modules.svelte';
   import Account from '../src/components/Account.svelte';
 
   // State to track the current page, default is Home page
@@ -81,6 +82,8 @@
     <Home />
   {:else if currentPage === 'Map'}
     <Map />
+  {:else if currentPage === 'Modules'}
+    <Modules />
   {:else if currentPage === 'Account'}
     <Account />
   {/if}
