@@ -9,6 +9,22 @@
   function navigate(page) {
     currentPage = page;
   }
+
+  // Add time functionality
+  let time = new Date().toLocaleTimeString('en-US', {
+    hour12: true,
+    hour: 'numeric',
+    minute: '2-digit'
+  }).replace(/\s[AP]M/, '');
+
+  // Update time every second
+  setInterval(() => {
+    time = new Date().toLocaleTimeString('en-US', {
+      hour12: true,
+      hour: 'numeric',
+      minute: '2-digit'
+    }).replace(/\s[AP]M/, '');
+  }, 1000);
 </script>
 
 <style>
@@ -51,8 +67,9 @@
   }
 
   .time {
-    padding-left: 20px;
-    font-weight: 1000;
+    padding-left: 15px;
+    font-weight: 600;
+    font-size: 1rem;
   }
 
   /* Correctly oriented notch */
@@ -117,7 +134,7 @@
 <div class="phone-container">
   <!-- iPhone styled top bar -->
   <div class="iphone-top-bar">
-    <span class="time">9:41</span>
+    <span class="time">{time}</span>
     <div class="notch"></div>
     <div class="status-icons">
       <!-- Signal Icon -->
