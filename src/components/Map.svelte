@@ -32,13 +32,19 @@
     border-radius: 8px;
   }
 
+  .map-wrapper {
+    width: 100%;
+    height: calc(100% - 60px); /* Reserve space for button */
+    position: relative;
+    margin-bottom: 15px; /* Add space between map and button */
+  }
+
   .map-iframe {
     width: 100%;
-    height: calc(100% - 65px);
+    height: 100%;
     border: none;
     border-radius: 8px;
     position: relative;
-    top: -65px;
   }
 
   .map-buttons {
@@ -63,7 +69,6 @@
 
 
   .back-button {
-    margin-top: auto;
     padding: 0.75rem 2rem;
     font-size: 1rem;
     color: #fff;
@@ -73,7 +78,6 @@
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
     z-index: 2;
-    align-self: center;
   }
 
   .back-button:hover {
@@ -84,18 +88,17 @@
 
 <div class="map-container">
   {#if currentMap !== 'buttons'}
-    <!-- Map iframe based on selected map -->
-    <iframe
-      class="map-iframe"
-      src={mapUrls[currentMap]}
-      title="UC Campus Map or UC Transloc"
-    ></iframe>
-    <!-- Back button to return to the selection screen -->
+    <div class="map-wrapper">
+      <iframe
+        class="map-iframe"
+        src={mapUrls[currentMap]}
+        title="UC Campus Map or UC Transloc"
+      ></iframe>
+    </div>
     <button class="back-button" on:click={() => showMap('buttons')}>
       Back
     </button>
   {:else}
-    <!-- Display map selection buttons -->
     <div class="map-buttons">
       <button class="map-button" on:click={() => showMap('uptownWest')}>
         Uptown West Campus Map
