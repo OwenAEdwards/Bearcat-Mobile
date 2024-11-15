@@ -2,6 +2,7 @@
   import Home from '../src/components/Home.svelte';
   import Map from '../src/components/Map.svelte';
   import Modules from '../src/components/Modules.svelte';
+  import Calendar from '../src/components/Calendar.svelte';
   import Account from '../src/components/Account.svelte';
 
   let currentPage = 'Home';
@@ -158,6 +159,8 @@
     <Modules />
   {:else if currentPage === 'Account'}
     <Account />
+  {:else if currentPage === 'Calendar'}
+    <Calendar />
   {/if}
 
   <!-- Bottom Navbar -->
