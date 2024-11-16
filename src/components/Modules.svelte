@@ -8,12 +8,12 @@
 
   // Define an array with title, URL, and icon path for each card
   const modules = [
-    { title: "Schedule Advisor Meeting", icon: "../src/assets/my-bearcat-network-icon.png", isAppointment: true },
-    { title: "Canvas", url: "https://uc.instructure.com/", icon: "../src/assets/canvas-icon.png" },
-    { title: "Catalyst", url: "https://www.catalyst.uc.edu/", icon: "../src/assets/catalyst-icon.png" },
-    { title: "Outlook", url: "https://outlook.office365.com/mail/login.html?bO=1&authRedirect=true", icon: "../src/assets/outlook-icon.png" },
-    { title: "One Stop", url: "https://onestop.uc.edu/", icon: "../src/assets/one-stop-icon.png" },
-    { title: "UCIT - Campus IT Support", url: "https://www.uc.edu/about/ucit/help.html", icon: "../src/assets/ucit-icon.png" }
+    { title: "Schedule Advisor Meeting", icon: "my-bearcat-network-icon.png", isAppointment: true },
+    { title: "Canvas", url: "https://uc.instructure.com/", icon: "canvas-icon.png" },
+    { title: "Catalyst", url: "https://www.catalyst.uc.edu/", icon: "catalyst-icon.png" },
+    { title: "Outlook", url: "https://outlook.office365.com/mail/login.html?bO=1&authRedirect=true", icon: "outlook-icon.png" },
+    { title: "One Stop", url: "https://onestop.uc.edu/", icon: "one-stop-icon.png" },
+    { title: "UCIT - Campus IT Support", url: "https://www.uc.edu/about/ucit/help.html", icon: "ucit-icon.png" }
   ];
 
   // Add advisor list

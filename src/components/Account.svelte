@@ -117,12 +117,12 @@
 <div class="settings-container">
   <!-- Connect to Canvas -->
   <button class="settings-button" type="button" on:click={connectCanvas} aria-label="Canvas">
-    <img src="../src/assets/canvas-icon.png" alt="Canvas Logo" class="icon" /> Connect to Canvas
+    <img src="canvas-icon.png" alt="Canvas Logo" class="icon" /> Connect to Canvas
   </button>
 
   <!-- Connect to Outlook -->
   <button class="settings-button" type="button" on:click={connectOutlook} aria-label="Outlook">
-    <img src="../src/assets/outlook-icon.png" alt="Outlook Logo" class="icon" /> Connect to Outlook
+    <img src="outlook-icon.png" alt="Outlook Logo" class="icon" /> Connect to Outlook
   </button>
 
   <!-- Push Notifications Toggle -->
