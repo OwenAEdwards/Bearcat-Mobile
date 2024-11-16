@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
-
   // Mock functions for connecting
   function connectCanvas() {
     console.log("Connecting to Canvas...");

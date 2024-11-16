@@ -124,12 +124,6 @@
   .nav-item:hover {
     color: var(--uc-red);
   }
-
-  .nav-icon {
-    fill: currentColor;
-    width: 24px;
-    height: 24px;
-  }
 </style>
 
 <div class="phone-container">

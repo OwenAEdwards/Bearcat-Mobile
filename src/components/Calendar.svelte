@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
-
   let currentDate = new Date();
   let selectedDate = null;
   let showEvents = false;
