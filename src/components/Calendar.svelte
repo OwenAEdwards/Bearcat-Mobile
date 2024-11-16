@@ -183,14 +183,26 @@
   }
 
   .events-container {
-    margin-top: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background: white;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    max-height: 300px;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+    max-height: 60%;
     overflow-y: auto;
-    border-top: 1px solid #eee;
-    animation: slideIn 0.2s ease-out;
+    z-index: 100;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
   }
 
   .events-header {
