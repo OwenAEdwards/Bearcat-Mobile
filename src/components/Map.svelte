@@ -19,24 +19,21 @@
 
 <style>
   .map-container {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 95%;
-    height: 90vh;
-    overflow: hidden;
-    position: relative;
-    margin: 0 auto;
-    border-radius: 8px;
+  flex: 1; /* Allow it to expand within the available space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Full width of parent */
+  height: 100%; /* Fill the available height */
+  overflow: hidden;
+  position: relative;
   }
 
   .map-wrapper {
-    width: 100%;
-    height: calc(100% - 60px); /* Reserve space for button */
+    width: 100%; /* Ensure the map takes full width */
+    flex: 1; /* Let it grow and fill the space */
     position: relative;
-    margin-bottom: 15px; /* Add space between map and button */
   }
 
   .map-iframe {
@@ -44,7 +41,6 @@
     height: 100%;
     border: none;
     border-radius: 8px;
-    position: relative;
   }
 
   .map-buttons {
