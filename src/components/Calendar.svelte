@@ -31,7 +31,6 @@
         { time: '18:00', title: 'Dinner with Study Group', location: 'CenterCourt' }
       ]
     }
-    // Add more dates and events as needed
   ];
 
   function getDaysInMonth(date) {
@@ -41,6 +40,10 @@
   function getFirstDayOfMonth(date) {
     return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   }
+
+  // Reactive variable for calendar days
+  let calendarDays = [];
+  $: calendarDays = generateCalendarDays();
 
   function generateCalendarDays() {
     const daysInMonth = getDaysInMonth(currentDate);
@@ -68,11 +71,13 @@
   }
 
   function previousMonth() {
-    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
+    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+    calendarDays = generateCalendarDays(); // Re-generate days for the new month
   }
 
   function nextMonth() {
-    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
+    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+    calendarDays = generateCalendarDays(); // Re-generate days for the new month
   }
 
   function selectDate(dateString) {
@@ -91,11 +96,9 @@
   }
 
   function formatSelectedDate(dateString) {
-    // Parse the date string correctly
     const [year, month, day] = dateString.split('-').map(num => parseInt(num));
-    // Create new date (month is 0-based in JavaScript)
     const date = new Date(year, month - 1, day);
-    
+
     return date.toLocaleDateString('en-US', { 
       weekday: 'long',
       month: 'long', 
@@ -313,8 +316,8 @@
     {#each ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as day}
       <div class="weekday">{day}</div>
     {/each}
-    
-    {#each generateCalendarDays() as { day, empty, dateString, hasEvents }}
+  
+    {#each calendarDays as { day, empty, dateString, hasEvents }}
       <div 
         class="day {empty ? 'empty' : ''} {hasEvents ? 'has-events' : ''}"
         on:click={() => !empty && selectDate(dateString)}
@@ -322,7 +325,7 @@
         {day}
       </div>
     {/each}
-  </div>
+  </div>  
 </div>
 
 {#if showEvents}
