@@ -1,40 +1,10 @@
 <script>
-
+  import { events } from '../stores/eventStore';
+  
   let currentDate = new Date();
   let selectedDate = null;
   let showEvents = false;
   let showNewEventModal = false;
-
-
-  // Sample events data - replace with your actual events data
-  const events = [
-    {
-      date: '2024-03-20',
-      events: [
-        { time: '09:00', title: 'CS Meeting', location: 'Baldwin 761' },
-        { time: '11:30', title: 'Study Group', location: 'Library Room 204' },
-        { time: '14:00', title: 'Lab Session', location: 'Engineering Building 305' }
-      ]
-    },
-    {
-      date: '2024-03-21',
-      events: [
-        { time: '10:00', title: 'Advisor Meeting', location: 'French Hall 219' },
-        { time: '13:00', title: 'Group Project', location: 'CARE/Crawley Building' }
-      ]
-    },
-    {
-      date: '2024-11-04',
-      events: [
-        { time: '09:00', title: 'CS2021 Lecture', location: 'Baldwin 755' },
-        { time: '11:00', title: 'Academic Advising', location: 'French Hall 211' },
-        { time: '13:30', title: 'Study Group - Algorithms', location: 'Langsam Library 401' },
-        { time: '15:00', title: 'CS Club Meeting', location: 'Rhodes 850' },
-        { time: '16:30', title: 'Research Lab', location: 'Engineering Research Center 516' },
-        { time: '18:00', title: 'Dinner with Study Group', location: 'CenterCourt' }
-      ]
-    }
-  ];
 
   // New event form fields
   let newEvent = {
@@ -50,30 +20,31 @@
       return;
     }
 
-    const eventDate = events.find(event => event.date === newEvent.date);
+    events.update(currentEvents => {
+      const eventDate = currentEvents.find(event => event.date === newEvent.date);
 
-    if (eventDate) {
-      eventDate.events.push({
-        time: newEvent.time,
-        title: newEvent.title,
-        location: newEvent.location
-      });
-    } else {
-      events.push({
-        date: newEvent.date,
-        events: [
-          {
+      if (eventDate) {
+        eventDate.events.push({
+          time: newEvent.time,
+          title: newEvent.title,
+          location: newEvent.location
+        });
+        return currentEvents;
+      } else {
+        return [...currentEvents, {
+          date: newEvent.date,
+          events: [{
             time: newEvent.time,
             title: newEvent.title,
             location: newEvent.location
-          }
-        ]
-      });
-    }
+          }]
+        }];
+      }
+    });
 
     newEvent = { date: "", time: "", title: "", location: "" };
     showNewEventModal = false;
-    calendarDays = generateCalendarDays(); // Refresh the calendar
+    calendarDays = generateCalendarDays();
   }
 
   function getDaysInMonth(date) {
@@ -89,6 +60,11 @@
   $: calendarDays = generateCalendarDays();
 
   function generateCalendarDays() {
+    let currentEvents;
+    events.subscribe(value => {
+      currentEvents = value;
+    })();
+
     const daysInMonth = getDaysInMonth(currentDate);
     const firstDay = getFirstDayOfMonth(currentDate);
     const days = [];
@@ -101,7 +77,7 @@
     // Add days of the month
     for (let i = 1; i <= daysInMonth; i++) {
       const dateString = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-      const hasEvents = events.some(event => event.date === dateString);
+      const hasEvents = currentEvents.some(event => event.date === dateString);
       days.push({ 
         day: i, 
         empty: false, 
@@ -137,7 +113,12 @@
   }
 
   function getEventsForDate(dateString) {
-    const dateEvents = events.find(event => event.date === dateString);
+    let currentEvents = [];
+    events.subscribe(value => {
+      currentEvents = value;
+    })();
+    
+    const dateEvents = currentEvents.find(event => event.date === dateString);
     return dateEvents ? dateEvents.events : [];
   }
 

@@ -1,5 +1,9 @@
 <script>
+  import { getTodayEvents } from '../stores/eventStore';
+  
   let date = new Date();
+  let todayEvents;
+  $: todayEvents = getTodayEvents();
   let diningBalances = {
     mealSwipes: 100,
     guestSwipes: 100,
@@ -128,6 +132,15 @@
     color: #666;
   }
 
+  .events-list {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .events-list p {
+    margin: 0.25rem 0;
+  }
+
 </style>
 
 <div class="dashboard">
@@ -140,7 +153,17 @@
         day: 'numeric',
       })}
     </h2>
-    <p>No more events today</p>
+    {#if todayEvents.length > 0}
+      <div class="events-list">
+        {#each todayEvents as event}
+          <p>
+            {new Date(`2000-01-01T${event.time}`).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'})}: {event.title} at {event.location}
+          </p>
+        {/each}
+      </div>
+    {:else}
+      <p>No more events today</p>
+    {/if}
   </div>
 
   <!-- Combined Balances and Restaurants Card -->
