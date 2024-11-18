@@ -47,6 +47,38 @@
     color: #000;
   }
 
+  .user-info-card {
+    position: relative;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #ffffff, #f7f7f7);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow: hidden;
+  }
+
+  .user-info-header {
+    margin-bottom: 1rem;
+  }
+
+  .user-info-details p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .barcode-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    opacity: 0.7;
+    padding-right: 0.5rem;
+  }
+
   .settings-button {
     display: flex;
     align-items: center;
@@ -172,6 +204,16 @@
 </style>
 
 <div class="settings-container">
+  <!-- User Information Card -->
+  <div class="user-info-card">
+    <div class="user-info-details">
+      <p><strong>Name:</strong> John Doe</p>
+      <p><strong>Year:</strong> Sophomore</p>
+      <p><strong>Major:</strong> Computer Science</p>
+    </div>
+    <img src="barcode.png" alt="Barcode" class="barcode-icon" />
+  </div>
+
   <!-- Connect to Canvas -->
   <button class="settings-button" type="button" on:click={connectCanvas} aria-label="Canvas">
     <img src="canvas-icon.png" alt="Canvas Logo" class="icon" /> Connect to Canvas
@@ -213,7 +255,6 @@
         </svg>
       </div>
     </button>
-
   </div>
 
   <!-- Sign Out Button -->
