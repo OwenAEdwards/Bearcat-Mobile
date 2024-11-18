@@ -42,8 +42,8 @@
   .settings-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 1.5rem;
+    padding: 1.5rem;
     color: #000;
   }
 
@@ -130,7 +130,7 @@
 
   .emergency-button-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 0.5rem;
     padding: 1rem;
@@ -139,15 +139,14 @@
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-top: 1rem;
   }
 
   .emergency-icon-button {
     background-color: #f44336;
     color: #fff;
     border: none;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -156,11 +155,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     outline: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .emergency-icon-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
 
   .emergency-icon svg {
@@ -172,6 +166,8 @@
   .emergency-info {
     font-size: 0.9rem;
     color: #666;
+    font-weight: bold;
+    margin-right: auto;
   }
 </style>
 
@@ -199,6 +195,7 @@
 
   <!-- Emergency Button -->
   <div class="emergency-button-container">
+    <p class="emergency-info">Hold for 2 seconds to activate</p>
     <button
       class="emergency-icon-button"
       on:mousedown={onHoldStart}
@@ -216,7 +213,7 @@
         </svg>
       </div>
     </button>
-    <p class="emergency-info">Hold for 2 seconds to activate</p>
+
   </div>
 
   <!-- Sign Out Button -->
