@@ -3,21 +3,38 @@
   function connectCanvas() {
     console.log("Connecting to Canvas...");
   }
-  
+
   function connectOutlook() {
     console.log("Connecting to Outlook...");
   }
-  
+
   function signOut() {
     console.log("Signing out...");
   }
-  
+
   // Toggle state
   let pushNotifications = false;
 
   // Toggle function
   function togglePushNotifications() {
     pushNotifications = !pushNotifications;
+    console.log(`Push Notifications: ${pushNotifications}`);
+  }
+
+  let holdTimeout;
+
+  // Emergency Button Logic
+  function activateEmergency() {
+    alert("Emergency Contact Activated!");
+    // Replace with actual emergency logic
+  }
+
+  function onHoldStart() {
+    holdTimeout = setTimeout(activateEmergency, 2000); // Hold for 2 seconds
+  }
+
+  function onHoldEnd() {
+    clearTimeout(holdTimeout);
   }
 </script>
 
@@ -27,21 +44,21 @@
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-    color: var(--uc-black);
+    color: #000;
   }
 
   .settings-button {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background: var(--uc-white);
+    background: #fff;
     border: 1px solid #ddd;
     padding: 1rem;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
-    transition: background 0.3s;
+    transition: background 0.3s ease;
   }
 
   .settings-button:hover {
@@ -55,7 +72,7 @@
     padding: 1rem;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background: var(--uc-white);
+    background: #fff;
   }
 
   .toggle {
@@ -65,23 +82,23 @@
     background-color: #ddd;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
   }
 
   .toggle.active {
-    background-color: var(--uc-red);
+    background-color: #f44336;
   }
 
   .toggle::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 3px;
     left: 3px;
     width: 14px;
     height: 14px;
-    background: var(--uc-white);
+    background: #fff;
     border-radius: 50%;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
   }
 
   .toggle.active::after {
@@ -90,8 +107,8 @@
 
   .sign-out-button {
     margin-top: auto;
-    background-color: var(--uc-red);
-    color: var(--uc-white);
+    background-color: #f44336;
+    color: #fff;
     padding: 1rem;
     border: none;
     border-radius: 8px;
@@ -99,16 +116,62 @@
     cursor: pointer;
     text-align: center;
     width: 100%;
+    transition: background-color 0.3s ease;
   }
 
   .sign-out-button:hover {
-    background-color: #b8001b;
+    background-color: #c62828;
   }
 
-  /* Icons */
   .icon {
     width: 24px;
     height: 24px;
+  }
+
+  .emergency-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .emergency-icon-button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .emergency-icon-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .emergency-icon svg {
+    width: 40px;
+    height: 40px;
+    fill: #fff;
+  }
+
+  .emergency-info {
+    font-size: 0.9rem;
+    color: #666;
   }
 </style>
 
@@ -132,6 +195,28 @@
       role="switch"
       aria-checked={pushNotifications}
     ></div>
+  </div>
+
+  <!-- Emergency Button -->
+  <div class="emergency-button-container">
+    <button
+      class="emergency-icon-button"
+      on:mousedown={onHoldStart}
+      on:mouseup={onHoldEnd}
+      on:mouseleave={onHoldEnd}
+      on:touchstart={onHoldStart}
+      on:touchend={onHoldEnd}
+      aria-label="Activate Emergency Contact"
+    >
+      <div class="emergency-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12 2C7.03 2 3 4.78 3 7.67c0 5.35 4.06 10.85 8.55 13.27a1.9 1.9 0 0 0 1.9 0C16.94 18.52 21 13.02 21 7.67 21 4.78 16.97 2 12 2zm0 19c-3.5-2-7-6.23-7-11.33C5 5.92 8.42 4 12 4s7 1.92 7 5.67c0 5.1-3.5 9.33-7 11.33zM12 6c-.83 0-1.5.67-1.5 1.5S11.17 9 12 9s1.5-.67 1.5-1.5S12.83 6 12 6zm0 3.5c-.28 0-.5.22-.5.5v4.25c0 .28.22.5.5.5s.5-.22.5-.5V10c0-.28-.22-.5-.5-.5z"
+          />
+        </svg>
+      </div>
+    </button>
+    <p class="emergency-info">Hold for 2 seconds to activate</p>
   </div>
 
   <!-- Sign Out Button -->
