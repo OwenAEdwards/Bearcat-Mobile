@@ -270,16 +270,27 @@
   .modal-button.confirm:hover {
     background-color: #c62828;
   }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
 </style>
 
 <div class="settings-container">
   <!-- User Information Card -->
   <div class="user-info-card">
-    <div class="user-info-details">
-      <p><strong>Name:</strong> John Doe</p>
-      <p><strong>Year:</strong> Sophomore</p>
-      <p><strong>Major:</strong> Computer Science</p>
-      <p><strong>M Number:</strong> M12345678</p>
+    <div class="user-info-details" style="display: flex; align-items: center; gap: 2rem;">
+      <img src="cat.png" alt="Profile Picture" class="profile-image" />
+      <div>
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Year:</strong> Sophomore</p>
+        <p><strong>Major:</strong> Computer Science</p>
+        <p><strong>M Number:</strong> M12345678</p>
+      </div>
     </div>
     <img src="barcode.png" alt="Barcode" class="barcode-icon" />
   </div>
