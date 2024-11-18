@@ -80,8 +80,16 @@
     background-color: #444;
     transform: scale(1.05);
   }
+
+  .uc-logo {
+  display: block; /* Ensure it behaves like a block element for alignment */
+  margin: 1rem 4rem; /* Center horizontally and add vertical space */
+  padding-top: 3rem; /* Add padding from the top */
+}
+  
 </style>
 
+<img src="\University_of_Cincinnati_logo.svg" alt="University of Cincinnati logo" class="uc-logo" />
 <div class="map-container">
   {#if currentMap !== 'buttons'}
     <div class="map-wrapper">

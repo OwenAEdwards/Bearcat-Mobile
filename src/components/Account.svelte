@@ -8,8 +8,20 @@
     console.log("Connecting to Outlook...");
   }
 
-  function signOut() {
-    console.log("Signing out...");
+  let showSignOutModal = false; // State to track if the modal is visible
+
+  function openSignOutModal() {
+    showSignOutModal = true;
+  }
+
+  function closeSignOutModal() {
+    showSignOutModal = false;
+  }
+
+  function confirmSignOut() {
+    console.log("Signed out!");
+    closeSignOutModal();
+    // Add any additional logic for signing out
   }
 
   // Toggle state
@@ -118,7 +130,7 @@
   }
 
   .toggle.active {
-    background-color: #f44336;
+    background-color: #e00122;
   }
 
   .toggle::after {
@@ -139,7 +151,7 @@
 
   .sign-out-button {
     margin-top: auto;
-    background-color: #f44336;
+    background-color: #e00122;
     color: #fff;
     padding: 1rem;
     border: none;
@@ -174,7 +186,7 @@
   }
 
   .emergency-icon-button {
-    background-color: #f44336;
+    background-color: #e00122;
     color: #fff;
     border: none;
     width: 60px;
@@ -200,6 +212,63 @@
     color: #666;
     font-weight: bold;
     margin-right: auto;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  /* Modal Content */
+  .modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .modal-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .modal-button.cancel {
+    background-color: #ddd;
+    color: #333;
+  }
+
+  .modal-button.cancel:hover {
+    background-color: #bbb;
+  }
+
+  .modal-button.confirm {
+    background-color: #e00122;
+    color: #fff;
+  }
+
+  .modal-button.confirm:hover {
+    background-color: #c62828;
   }
 </style>
 
@@ -259,7 +328,24 @@
   </div>
 
   <!-- Sign Out Button -->
-  <button class="sign-out-button" on:click={signOut}>
+  <button class="sign-out-button" on:click={openSignOutModal}>
     Sign Out
   </button>
+
+  <!-- Sign Out Confirmation Modal -->
+  {#if showSignOutModal}
+    <div class="modal-overlay" role="dialog" aria-modal="true">
+      <div class="modal-content">
+        <p>Are you sure you want to sign out?</p>
+        <div class="modal-buttons">
+          <button class="modal-button cancel" on:click={closeSignOutModal}>
+            Cancel
+          </button>
+          <button class="modal-button confirm" on:click={confirmSignOut}>
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  {/if}
 </div>

@@ -53,7 +53,8 @@
     flex-direction: column;
   }
 
-  .iphone-top-bar {
+/* iPhone Styled Top Bar */
+.iphone-top-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -72,6 +73,7 @@
     font-size: 1rem;
   }
 
+  /* Correctly oriented notch */
   .notch {
     position: absolute;
     top: 0;
@@ -80,10 +82,11 @@
     width: 210px;
     height: 30px;
     background-color: #333;
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 20px 20px; /* Inverted for the correct orientation */
     z-index: 2;
   }
 
+  /* Icons (battery, wifi, signal) */
   .status-icons {
     display: flex;
     gap: 8px;
@@ -136,28 +139,17 @@
     <div class="notch"></div>
     <div class="status-icons">
       <!-- Signal Icon -->
-      <svg class="status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <line x1="2" y1="20" x2="2" y2="20" />
-        <line x1="7" y1="16" x2="7" y2="20" />
-        <line x1="12" y1="12" x2="12" y2="20" />
-        <line x1="17" y1="8" x2="17" y2="20" />
-        <line x1="22" y1="4" x2="22" y2="20" />
-      </svg>
+      <svg class="status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="2" y1="20" x2="2" y2="20"/><line x1="7" y1="16" x2="7" y2="20"/><line x1="12" y1="12" x2="12" y2="20"/><line x1="17" y1="8" x2="17" y2="20"/><line x1="22" y1="4" x2="22" y2="20"/></svg>
+      
       <!-- Wi-Fi Icon -->
-      <svg class="status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M5 12.55a11 11 0 0 1 14.08 0" />
-        <path d="M1.42 9a16 16 0 0 1 21.16 0" />
-        <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
-        <line x1="12" y1="20" x2="12.01" y2="20" />
-      </svg>
+      <svg class="status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+      <br>
       <!-- Battery Icon -->
-      <svg class="status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19" />
-        <line x1="23" y1="13" x2="23" y2="11" />
-        <polyline points="11 6 7 12 13 12 9 18" />
-      </svg>
+      <svg class="status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19"></path><line x1="23" y1="13" x2="23" y2="11"></line><polyline points="11 6 7 12 13 12 9 18"></polyline></svg>
+      <br>
     </div>
   </div>
+
 
   {#if currentPage === 'Home'}
     <Home />

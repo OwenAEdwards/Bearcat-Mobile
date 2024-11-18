@@ -168,11 +168,10 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
-  .calendar-header {
+    .calendar-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the content */
     align-items: center;
-    margin-bottom: 1rem;
   }
 
   .month-nav {
@@ -190,17 +189,13 @@
   }
 
   .today-button {
-    padding: 0.5rem 1rem;
+    padding: .8rem 1.2rem;
     background: var(--uc-red);
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
-  }
-
-  .today-button:hover {
-    background: #a00;
   }
 
   .calendar-grid {
@@ -346,7 +341,7 @@
   }
 
   .close-button:hover {
-    background: #f5f5f5;
+    background: #f3f3f3;
   }
 
   .no-events {
@@ -441,7 +436,7 @@
 
   .btn-new-event {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.1rem;
     background-color: var(--uc-red); /* Replace with your primary color */
     color: white;
     font-size: 0.9rem;
@@ -462,6 +457,21 @@
     outline-offset: 2px;
   }
   
+  /* Button container below the calendar */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem; /* Adds spacing above the buttons */
+}
+
+.today-button {
+  flex-grow: 0; /* Prevents the button from stretching */
+}
+
+.btn-new-event {
+  flex-grow: 0; /* Prevents the button from stretching */
+}
+
 </style>
 
 <div class="calendar-container">
@@ -470,10 +480,6 @@
       <button class="nav-button" on:click={previousMonth}>&lt;</button>
       <h2>{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
       <button class="nav-button" on:click={nextMonth}>&gt;</button>
-    </div>
-    <div class="button-group">
-      <button class="today-button" on:click={goToToday}>Today</button>
-      <button class="btn-new-event" on:click={() => (showNewEventModal = true)}>New Event</button>
     </div>
   </div>
 
@@ -490,7 +496,11 @@
         {day}
       </div>
     {/each}
-  </div>  
+  </div>
+  <div class="button-container">
+    <button class="today-button" on:click={goToToday}>Today</button>
+    <button class="btn-new-event" on:click={() => (showNewEventModal = true)}>New Event</button>
+  </div>
 </div>
 
 {#if showNewEventModal}

@@ -158,7 +158,7 @@
   }
 
   .btn-secondary {
-    background-color: #6c757d;
+    background-color: #a7a5aa;
     color: white;
   }
 
@@ -210,7 +210,7 @@
   }
 </style>
 
-<div class="modules">
+<div class="modules" style="margin-top: 10px;">
   {#each modules as module}
     {#if module.isAppointment}
       <div class="card" on:click={toggleAppointmentForm} style="cursor: pointer;">

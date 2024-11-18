@@ -27,10 +27,10 @@
 
 <style>
   :root {
-    --uc-black: #333;
-    --uc-white: #fff;
-    --uc-red: #b22222;
-    --uc-gray: #f4f4f4;
+    --uc-black: #000000;
+    --uc-white: #ffffff;
+    --uc-red: #e00122;
+    --uc-gray: #f3f3f3;
     --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
