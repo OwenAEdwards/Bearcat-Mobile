@@ -42,33 +42,21 @@
   .settings-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 1.5rem;
+    padding: 1.5rem;
     color: #000;
-    max-width: 600px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    width: 100%;
-    overflow-y: scroll;
-  }
-
-  @media (max-width: 480px) {
-    .settings-container {
-      padding: 0.75rem;
-      gap: 0.75rem;
-    }
   }
 
   .user-info-card {
     position: relative;
-    padding: 1.25rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 8px;
     background: linear-gradient(145deg, #ffffff, #f7f7f7);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
-    box-sizing: border-box;
-    width: 100%;
+    overflow: hidden;
   }
 
   .user-info-header {
@@ -77,33 +65,32 @@
 
   .user-info-details p {
     margin: 0.5rem 0;
-    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-size: 1rem;
     color: #555;
   }
 
   .barcode-icon {
     position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    width: clamp(20px, 5vw, 25px);
-    height: auto;
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
     opacity: 0.7;
+    padding-right: 0.5rem;
   }
 
   .settings-button {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
     background: #fff;
     border: 1px solid #ddd;
-    padding: 0.75rem 1rem;
+    padding: 1rem;
     border-radius: 8px;
     cursor: pointer;
-    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-size: 1rem;
     font-weight: bold;
     transition: background 0.3s ease;
-    box-sizing: border-box;
-    width: 100%;
   }
 
   .settings-button:hover {
@@ -114,23 +101,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 1rem;
+    padding: 1rem;
     border: 1px solid #ddd;
     border-radius: 8px;
     background: #fff;
-    box-sizing: border-box;
-    width: 100%;
   }
 
   .toggle {
     position: relative;
-    width: clamp(36px, 8vw, 40px);
-    height: clamp(18px, 4vw, 20px);
+    width: 40px;
+    height: 20px;
     background-color: #ddd;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    flex-shrink: 0;
   }
 
   .toggle.active {
@@ -142,8 +126,8 @@
     position: absolute;
     top: 3px;
     left: 3px;
-    width: calc(100% - 6px - 20px);
-    height: calc(100% - 6px);
+    width: 14px;
+    height: 14px;
     background: #fff;
     border-radius: 50%;
     transition: transform 0.3s ease;
@@ -157,15 +141,13 @@
     margin-top: auto;
     background-color: #f44336;
     color: #fff;
-    padding: 0.75rem 1rem;
+    padding: 1rem;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
-    box-sizing: border-box;
     width: 100%;
-    font-size: clamp(0.875rem, 2vw, 1rem);
     transition: background-color 0.3s ease;
   }
 
@@ -174,39 +156,29 @@
   }
 
   .icon {
-    width: clamp(20px, 5vw, 24px);
-    height: auto;
-    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
   }
 
   .emergency-button-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+    padding: 1rem;
     border: 1px solid #ddd;
     border-radius: 12px;
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    width: 100%;
-  }
-
-  @media (max-width: 380px) {
-    .emergency-button-container {
-      flex-direction: column;
-      text-align: center;
-      gap: 0.5rem;
-    }
+    text-align: center;
   }
 
   .emergency-icon-button {
     background-color: #f44336;
     color: #fff;
     border: none;
-    width: clamp(50px, 12vw, 60px);
-    height: clamp(50px, 12vw, 60px);
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -215,26 +187,19 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     outline: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    flex-shrink: 0;
   }
 
   .emergency-icon svg {
-    width: 70%;
-    height: 70%;
+    width: 40px;
+    height: 40px;
     fill: #fff;
   }
 
   .emergency-info {
-    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    font-size: 0.9rem;
     color: #666;
     font-weight: bold;
     margin-right: auto;
-  }
-
-  @media (max-width: 380px) {
-    .emergency-info {
-      margin-right: 0;
-    }
   }
 </style>
 
