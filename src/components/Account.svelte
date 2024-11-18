@@ -210,6 +210,7 @@
       <p><strong>Name:</strong> John Doe</p>
       <p><strong>Year:</strong> Sophomore</p>
       <p><strong>Major:</strong> Computer Science</p>
+      <p><strong>M Number:</strong> M12345678</p>
     </div>
     <img src="barcode.png" alt="Barcode" class="barcode-icon" />
   </div>

@@ -13,6 +13,7 @@
     { title: "Catalyst", url: "https://www.catalyst.uc.edu/", icon: "catalyst-icon.png" },
     { title: "Outlook", url: "https://outlook.office365.com/mail/login.html?bO=1&authRedirect=true", icon: "outlook-icon.png" },
     { title: "One Stop", url: "https://onestop.uc.edu/", icon: "one-stop-icon.png" },
+    { title: "CampusLink", url: "https://campuslink.uc.edu/", icon: "campuslink-icon.png" },
     { title: "UCIT - Campus IT Support", url: "https://www.uc.edu/about/ucit/help.html", icon: "ucit-icon.png" }
   ];
 

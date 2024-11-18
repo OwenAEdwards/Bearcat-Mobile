@@ -1,7 +1,10 @@
 <script>
+
   let currentDate = new Date();
   let selectedDate = null;
   let showEvents = false;
+  let showNewEventModal = false;
+
 
   // Sample events data - replace with your actual events data
   const events = [
@@ -32,6 +35,46 @@
       ]
     }
   ];
+
+  // New event form fields
+  let newEvent = {
+    date: "",
+    time: "",
+    title: "",
+    location: ""
+  };
+
+  function addEvent() {
+    if (!newEvent.date || !newEvent.time || !newEvent.title || !newEvent.location) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    const eventDate = events.find(event => event.date === newEvent.date);
+
+    if (eventDate) {
+      eventDate.events.push({
+        time: newEvent.time,
+        title: newEvent.title,
+        location: newEvent.location
+      });
+    } else {
+      events.push({
+        date: newEvent.date,
+        events: [
+          {
+            time: newEvent.time,
+            title: newEvent.title,
+            location: newEvent.location
+          }
+        ]
+      });
+    }
+
+    newEvent = { date: "", time: "", title: "", location: "" };
+    showNewEventModal = false;
+    calendarDays = generateCalendarDays(); // Refresh the calendar
+  }
 
   function getDaysInMonth(date) {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -323,6 +366,102 @@
       transform: translateY(0);
     }
   }
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+    width: 100%; /* Ensure it spans the container width */
+    box-sizing: border-box; /* Include padding and borders in the total width */
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input {
+    width: 100%; /* Make the input fill the container width */
+    max-width: 100%; /* Prevent overflow by capping the width */
+    padding: 6px; /* Adjust padding for consistency */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    box-sizing: border-box; /* Ensure padding and borders are included in the total width */
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .btn-primary {
+    background-color: var(--uc-red);
+    color: white;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .btn-new-event {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--uc-red); /* Replace with your primary color */
+    color: white;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-new-event:active {
+    background-color: #b71c1c; /* Even darker red for active click */
+    transform: scale(0.98);
+  }
+
+  .btn-new-event:focus {
+    outline: 2px solid #f44336; /* Focus ring for accessibility */
+    outline-offset: 2px;
+  }
+  
 </style>
 
 <div class="calendar-container">
@@ -332,7 +471,10 @@
       <h2>{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
       <button class="nav-button" on:click={nextMonth}>&gt;</button>
     </div>
-    <button class="today-button" on:click={goToToday}>Today</button>
+    <div class="button-group">
+      <button class="today-button" on:click={goToToday}>Today</button>
+      <button class="btn-new-event" on:click={() => (showNewEventModal = true)}>New Event</button>
+    </div>
   </div>
 
   <div class="calendar-grid">
@@ -350,6 +492,49 @@
     {/each}
   </div>  
 </div>
+
+{#if showNewEventModal}
+  <div class="modal-backdrop" on:click={() => (showNewEventModal = false)}>
+    <div class="modal" on:click|stopPropagation>
+      <h2>Add New Event</h2>
+      <form on:submit|preventDefault={addEvent}>
+        <div class="form-group">
+          <label for="event-date">Event Date</label>
+          <input
+            type="date"
+            id="event-date"
+            bind:value={newEvent.date}
+            min={new Date().toISOString().split('T')[0]}
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="event-time">Event Time</label>
+          <input type="time" id="event-time" bind:value={newEvent.time} required />
+        </div>
+
+        <div class="form-group">
+          <label for="event-title">Event Title</label>
+          <input type="text" id="event-title" bind:value={newEvent.title} required />
+        </div>
+
+        <div class="form-group">
+          <label for="event-location">Event Location</label>
+          <input type="text" id="event-location" bind:value={newEvent.location} required />
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn btn-secondary" on:click={() => (showNewEventModal = false)}>
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Add Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{/if}
+
 
 {#if showEvents}
   <div class="events-container">
