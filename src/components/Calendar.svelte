@@ -80,6 +80,14 @@
     calendarDays = generateCalendarDays(); // Re-generate days for the new month
   }
 
+  function goToToday() {
+    currentDate = new Date();
+    const today = new Date();
+    const dateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    calendarDays = generateCalendarDays();
+    selectDate(dateString);
+  }
+
   function selectDate(dateString) {
     selectedDate = dateString;
     showEvents = true;
@@ -136,6 +144,20 @@
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--uc-red);
+  }
+
+  .today-button {
+    padding: 0.5rem 1rem;
+    background: var(--uc-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .today-button:hover {
+    background: #a00;
   }
 
   .calendar-grid {
@@ -310,6 +332,7 @@
       <h2>{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
       <button class="nav-button" on:click={nextMonth}>&gt;</button>
     </div>
+    <button class="today-button" on:click={goToToday}>Today</button>
   </div>
 
   <div class="calendar-grid">
