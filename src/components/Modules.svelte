@@ -1,10 +1,13 @@
 <script>
   let showAppointmentForm = false;
   let showConfirmation = false;
+  let showLoadingModal = false;
+  let loadingMessage = '';
   let appointmentPurpose = '';
   let appointmentDate = '';
   let selectedAdvisor = '';
   let confirmedAdvisorName = '';
+  let currentModuleUrl = '';
 
   // Define an array with title, URL, and icon path for each card
   const modules = [
@@ -58,6 +61,20 @@
     // Reset form
     appointmentPurpose = '';
     selectedAdvisor = '';
+  }
+
+  function handleModuleClick(module) {
+    if (!module.isAppointment) {
+      showLoadingModal = true;
+      
+      loadingMessage = `(Our goal was to load data from the API)`;
+      
+      currentModuleUrl = module.url;
+    } 
+  }
+
+  function closeLoadingModal() {
+    showLoadingModal = false;
   }
 </script>
 
@@ -118,6 +135,29 @@
     border-radius: 8px;
     width: 80%;
     max-width: 300px;
+  }
+
+  .loading-modal {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--uc-red);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   .form-group {
@@ -209,6 +249,33 @@
     font-size: 1.2rem;
     margin-bottom: 15px;
   }
+
+  .loading-modal a {
+    color: var(--uc-red);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .loading-modal a:hover {
+    text-decoration: underline;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: #666;
+    transition: color 0.2s;
+  }
+
+  .close-button:hover {
+    color: var(--uc-red);
+  }
 </style>
 
 <div class="modules" style="margin-top: 10px;">
@@ -219,10 +286,10 @@
         <span class="title">{module.title}</span>
       </div>
     {:else}
-      <a href={module.url} target="_blank" rel="noopener noreferrer" class="card">
+      <div class="card" on:click={() => handleModuleClick(module)} style="cursor: pointer;">
         <img src={module.icon} alt="{module.title} icon" class="icon" />
         <span class="title">{module.title}</span>
-      </a>
+      </div>
     {/if}
   {/each}
 </div>
@@ -276,6 +343,20 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+{/if}
+
+{#if showLoadingModal}
+  <div class="modal-backdrop">
+    <div class="loading-modal">
+      <button class="close-button" on:click={closeLoadingModal}>&times;</button>
+      <div class="loading-spinner"></div>
+      <p>
+        <a href={currentModuleUrl} target="_blank" rel="noopener noreferrer">
+          {loadingMessage}
+        </a>
+      </p>
     </div>
   </div>
 {/if}
